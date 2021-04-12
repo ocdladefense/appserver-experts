@@ -1,0 +1,121 @@
+<?php
+
+
+function experts_menu()
+{
+	$items = array();
+	
+	$items['experts'] = array(
+		'title' => 'Expert Witnesses',
+		'comment' => 'Base router/loader for Saleforce directory.',
+		// 'access' => 'user_is_authenticated',
+		// 'access arguments' => array('admin'),
+		'page callback' => 'show_experts',
+		'files' => array(
+			'controller' => 'includes/ExpertController.php'
+		),
+		'theme' => 'ocdla2',
+		'routeClass' => 'ExpertController'
+	);	
+
+
+	
+	$items['directory/expert-witness/search'] = array(
+		'comment' => 'Base router/loader for Saleforce directory.',
+		'access' => true,//'user_is_authenticated',
+		'access arguments' => array('member'),
+		'files' => array(
+			'dependency1' => '/sites/default/modules/salesforce/includes/SalesforceController.php',
+			'dependency' => '/sites/default/modules/directory/includes/SfDirectoryController.php',
+			'controller' => 'includes/ExpertController.php'
+		),
+		'page callback' => 'ewSearchHome',
+		'title' => 'OCDLA Expert Witness Directory Search',
+		'routeClass' => 'ExpertController',
+		'routeArguments' => array(2),
+		'theme' => 'ocdla2',
+	);
+
+	$items['expert/%expertId'] = array(
+		'title' => 'Expert Witness Profile',
+		'comment' => 'Base router/loader for Saleforce directory.',
+		'access' => true,//'user_is_authenticated',
+		//'access arguments' => array('member'),
+		'page callback' => 'showExpert',
+		'routeArguments' => array(1),
+		'files' => array(
+			'dependency1' => '/sites/default/modules/salesforce/includes/SalesforceController.php',
+			'dependency' => '/sites/default/modules/directory/includes/SfDirectoryController.php',
+			'controller' => 'includes/ExpertController.php'
+		),
+		'theme' => 'ocdla2',
+		'routeClass' => 'ExpertController'
+	);	
+	
+	$items['expert/%expertId/update'] = array(
+		'title' => 'Expert Witness Profile',
+		'comment' => 'Base router/loader for Saleforce directory.',
+		'access' => true,//'user_is_authenticated',
+		//'access arguments' => array('admin'),
+		'page callback' => 'updateExpert',
+		'routeArguments' => array(1),
+		'files' => array(
+			'dependency1' => '/sites/default/modules/salesforce/includes/SalesforceController.php',
+			'dependency' => '/sites/default/modules/directory/includes/SfDirectoryController.php',
+			'controller' => 'includes/ExpertUpdate.php'
+		),
+		'theme' => 'ocdla2',
+		'routeClass' => 'ExpertUpdate',
+		'output handler' => 'json'
+	);	
+	
+	$items['expert/%expertId/home'] = array(
+		'title' => 'My Expert Witness Profile',
+		'comment' => 'Base router/loader for Saleforce directory.',
+		'access' => 'user_is_authenticated',
+		'access arguments' => array('admin'),
+		'page callback' => 'expertWitnessHome',
+		'routeArguments' => array(1),
+		'files' => array(
+			'dependency1' => '/sites/default/modules/salesforce/includes/SalesforceController.php',
+			'dependency' => '/sites/default/modules/directory/includes/SfDirectoryController.php',
+			'controller' => 'includes/ExpertController.php'
+		),
+		'theme' => 'ocdla2',
+		'routeClass' => 'ExpertController'
+	);	
+	
+	$items['expert/%expertId/edit'] = array(
+		'title' => 'Expert Witness - Edit Profile',
+		'comment' => 'Base router/loader for Saleforce directory.',
+		'access' => true,//'user_is_authenticated',
+		'access arguments' => array('admin'),
+		'page callback' => 'expertWitnessEdit',
+		'routeArguments' => array(1),
+		'files' => array(
+			'dependency1' => '/sites/default/modules/salesforce/includes/SalesforceController.php',
+			'dependency' => '/sites/default/modules/directory/includes/SfDirectoryController.php',
+			'controller' => 'includes/ExpertController.php'
+		),
+		'theme' => 'ocdla2',
+		'routeClass' => 'ExpertController'
+	);	
+	
+	
+	$items['expert/%expertId/do-update'] = array(
+		'title' => 'Expert Witness - Test Update',
+		'access' => 'user_is_authenticated',
+		'access arguments' => array('admin'),
+		'page callback' => 'testUpdate',
+		'routeArguments' => array(1),
+		'files' => array(
+			'dependency1' => '/sites/default/modules/salesforce/includes/SalesforceController.php',
+			'dependency' => '/sites/default/modules/directory/includes/SfDirectoryController.php',
+			'controller' => 'includes/ExpertUpdate.php'
+		),
+		'theme' => 'ocdla2',
+		'routeClass' => 'ExpertUpdate'
+	);	
+	
+	return $items;
+}

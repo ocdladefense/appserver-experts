@@ -1,0 +1,129 @@
+<a href="javascript: history.go(-1);">Back to Previous Page</a>
+
+{% if error|length %}
+	<p style='font-style:italic;'>
+		Error: {{ error }}
+	</p>
+{% endif %}
+
+
+{% for contact in contacts %}
+<table width="750" border="0" cellspacing="1" cellpadding="4" bgcolor="#ccc">
+	<tr valign="top" bgcolor="">
+		<td class="text" colspan="2" style='background-color:#606; font-weight:bold;color:#fff;'>
+			MEMBER INFORMATION
+		</td>
+	</tr>
+	<tr valign="top">
+		<td class="text" align="right" width="24%" style='background-color:#fff;color:#000;'>
+			Name:
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			{{ contact.FirstName }} {{ contact.LastName }}
+		</td>
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF" height="4">
+			<font color="000000"> Organization:</font>
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6" height="4">
+			{{ contact.Ocdla_Organization__c }}
+		</td>
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF" height="4">
+			OSB#&nbsp;/&nbsp;PSID#:
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6" height="4">
+			{{ contact.Bar_Number__c }} {# contact.Investigator_License_Number__c #}
+		</td>
+	</tr>
+
+
+	
+{#      
+$tmp="<i>This user has chosen not to publish this information.</i>";
+if( $row["publish"]==0 ) {
+	$address_line_1=$tmp;
+	$address_line_2=$tmp;
+}
+else {
+	$address_line_1=$row["address_line_1"];
+	$address_line_2=$row["address_line_2"];
+}
+#}
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" height="2" width="24%" align="right" bgcolor="FFFFFF">
+			Address Line 1:
+		</td>
+		<td class="text" height="2" width="76%" bgcolor="DBE1E6">
+			{{ contact.MailingStreet }}
+		</td>
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF">
+			City, State, Zip:
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			{{ contact.MailingCity }}
+			{{ contact.MailingState }} {{ contact.MailingPostalCode }}
+		</td>
+
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF">
+			Phone:
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			{# phoneNumberFormat( work_phone ) #}
+			{{ contact.OrderApi__Work_Phone__c }}
+		</td>
+
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF">Cell Phone:</td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			{# phoneNumberFormat(cell_phone) #}
+			{{ contact.MobilePhone }}
+		</td>
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF"><font color="000000">Fax:</font></td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			{# phoneNumberFormat(fax_number) #}
+			{{ contact.Fax }}
+		</td>
+
+	</tr>
+
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF"><font color="000000">E-Mail:</font></td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			<a href="mailto:{{ OrderApi__Work_Email__c }}">{{ contact.OrderApi__Work_Email__c }}</a>
+		</td>
+	</tr>
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF">
+			<font color="000000">Web:</font>
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			<a href="http://{{ Ocdla_Website__c }}" target="_new">{{ contact.Ocdla_Website__c }}</a>
+		</td>
+
+	</tr>
+
+	<tr valign="top" bgcolor="FFFFFF">
+		<td class="text" align="right" width="24%" bgcolor="FFFFFF">
+			Areas of Interest:
+		</td>
+		<td class="text" width="76%" bgcolor="DBE1E6">
+			{{ contact.Ocdla_Areas_of_Interest_1__c }}<br />
+			{{ contact.Ocdla_Areas_of_Interest_2__c }}<br />
+			{{ contact.Ocdla_Areas_of_Interest_3__c }}<br />
+			{{ contact.Ocdla_Areas_of_Interest_4__c }}<br />
+			{{ contact.Ocdla_Areas_of_Interest_5__c }}<br />
+		</td>
+	</tr>
+	
+</table>
+{% endfor %}

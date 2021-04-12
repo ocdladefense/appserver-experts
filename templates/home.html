@@ -1,0 +1,187 @@
+<!--
+<div class='feature'>
+	<h3 class='feature-title'>Feature Title</h3>
+	<span class='feature-summary'>A feature summary here.</span>
+	<p class='feature-description'>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non elit eget felis vulputate dictum. Sed ac ullamcorper velit. Vestibulum non eleifend metus, non ornare nisi. Nunc in nisi at justo condimentum tristique. Nullam ultricies magna eu massa rhoncus, a efficitur dolor efficitur. Vivamus aliquam tincidunt enim at dignissim. Phasellus efficitur turpis nec rhoncus venenatis. Donec et pulvinar nisl. Suspendisse et enim quis erat lobortis iaculis eget ut arcu. Suspendisse id ipsum posuere, blandit sem sed, sagittis purus. Pellentesque auctor feugiat lectus, vel vulputate mauris venenatis tincidunt. Nam vitae risus a turpis elementum rutrum eget eu risus.
+	</p>
+</div>
+-->
+
+
+<form id="expert-witness-update-form" onsubmit="return (function(f){alert('You can\'t submit me, yet!');console.log(f); return false;})(this);">
+	<div>
+	
+<form>
+	<div>
+	
+		<fieldset>
+			<legend>Admin only</legend>
+			<div class="form-item">
+				<label for="expert-type">Witness status</label>
+				<input type="checkbox" id="expert-type" value="adverse-witness" />Adverse Witness
+				<br />
+				<input type="checkbox" id="expert-type" value="friendly-witness" />Friendly Witness
+			</div>
+			<div class="form-item">
+				<label for="documents">Documents/Transcripts</label>
+				<input type="file" id="documents" multiple="multiple" />
+				<!--
+				<input type="file" id="documents" multiple="multiple" accept="image/*" />
+				-->
+			</div>
+		</fieldset>
+	
+		<div class="form-item">
+			<label for="first-name">First Name</label>
+			<input type="text" id="first-name" placeholder="First Name" value="{{ contact.FirstName }}" />
+		</div>
+		
+		<div class="form-item">
+			<label for="last-name">Last Name</label>
+			<input type="text" id="last-name" placeholder="Last Name" value="{{ contact.LastName }}" />
+		</div>
+		
+		<div class="form-item">
+			<label for="Ocdla_Organization__c">Company</label>
+			<input type="text" id="Ocdla_Organization__c" placeholder="Company name, if applicable" value="{{ contact.Ocdla_Organization__c }}" autocapitalize="sentences" />
+		</div>
+		
+		<div class="form-item">
+			<label for="OrderApi__Work_Phone__c">Telephone</label>
+			<input type="tel" name="OrderApi__Work_Phone__c" value="{{ contact.OrderApi__Work_Phone__c }}" placeholder="800-123-4567" />
+		</div>
+		
+		<div class="form-item">
+			<label for="OrderApi__Work_Email__c">Email</label>
+			<input type="OrderApi__Work_Email__c" name="email" value="{{ contact.OrderApi__Work_Email__c }}" placeholder="myname at mycompany.com" />
+		</div>
+
+		
+		<div class="form-item">
+			<label for="Ocdla_Website__c">Website</label>
+			<input type="url" name="Ocdla_Website__c" placeholder="www.yourwebsite.com" value="{{ contact.Ocdla_Website__c }}" />
+		</div>
+		
+		<fieldset>		
+			<legend>Address</legend>
+			<div class="form-item">
+				<label for="MailingStreet">Street / P.O. Box</label>
+				<textarea cols="20" rows="2" name="MailingStreet" value="{{ contact.MailingStreet }}"></textarea>
+			</div>
+			
+			<div class="form-item">
+				<label for="MailingCity">City</label>
+				<input type="text" name="MailingCity" value="{{ contact.MailingCity }}" />
+			</div>
+			
+			<div class="form-item">
+				<label for="MailingState">State</label>
+				<input type="text" name="MailingState" value="{{ contact.MailingState }}" />
+			</div>
+			
+			<div class="form-item">
+				<label for="MailingZip">Zip</label>
+				<input type="text" name="MailingZip" value="{{ contact.MailingZip }}" />
+			</div>
+		</fieldset>
+		
+		
+		
+
+	
+		<fieldset>
+			<legend>Expertise</legend>
+			<div class="form-item">
+				<label for="expertise-comments">General Area</label>
+				<select name="area-of-expertise">
+					<option selected="selected">Aid and Assist</option>
+					<option>Mitigation</option>
+					<option>Forensic Expert</option>
+				</select>
+			</div>
+				
+			<div class="form-item">
+
+					
+				<label for="Ocdla_Expert_Witness_Primary__c">Primary Area</label>				
+				<select name="Ocdla_Expert_Witness_Primary__c">
+				{% set vars = {'primary':contact.Ocdla_Expert_Witness_Primary__c} %}
+					{% include 'areas.html' with vars %}
+				</select>
+			</div>
+			
+			<div class="form-item">
+				<label for="expertise-comments">Comments</label>
+				<textarea name="expertise-comments" rows="5" style="line-height:normal;height:100px;">My expertise is with children, adolescents and young adults and can evaluate clients with ASD.</textarea>
+			</div>
+		</fieldset>
+	
+		<fieldset>
+			<legend>Availability</legend>
+			<div class="form-item">
+				<input type="radio" name="availability-type" value="exclude-dates" checked="checked" />I am available:
+				<br />
+				<input type="radio" name="availability-type" value="include-dates" />I am not available:
+			</div>
+			<div class="form-item">
+				<label for="start-date">Start Date</label>
+				<input class="dates" type="date" id="start-date" />
+			<div>
+			<div class="form-item">
+				<label for="end-date">End Date</label>
+				<input class="dates" type="date" id="end-date" />
+			<div>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Travel Availability</legend>
+			<div class="form-item">
+				<label for="travel-options">I am willing to travel:</label>
+				<input type="radio" name="travel-options" value="exclude-dates" checked="checked" />within 25 miles
+				<br />
+				<input type="radio" name="travel-options" value="include-dates" />within 100 miles
+				<br />
+				... of my current location.
+			<div>
+			
+		</fieldset>
+		
+		
+		<fieldset>
+			<legend>Business</legend>
+			<div class="form-item">
+				<label for="hourly-rate">Hourly rate</label>
+				<input type="text" name="hourly-rate" placeholder="0.00" />
+			</div>
+			
+			<div class="form-item">
+				<label for="min-hours">Minimum hours</label>
+				<input type="text" name="min-hours" placeholder="0" />
+			<div>
+			
+		</fieldset>
+		
+		
+		<fieldset>
+			<legend>Supplementary</legend>
+			<div class="form-item">
+				<label for="documents">CV/Articles</label>
+				<input type="file" id="documents" multiple="multiple" />
+				<!--
+				<input type="file" id="documents" multiple="multiple" accept="image/*" />
+				-->
+			</div>
+		</fieldset>
+		
+		<div class="form-item">
+			<button id="submit-me" type="submit">Update</button>
+		</div>
+	</div>
+</form>
+
+<script>
+  $(function() {
+    $( ".dates" ).datepicker();
+  });
+</script>

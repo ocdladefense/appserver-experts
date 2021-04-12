@@ -1,0 +1,286 @@
+{#
+
+Ocdla_Expert_Comments
+Ocdla_Expert_Travel_Availability__c
+
+
+#}
+
+
+<div class="expert-local-actions">
+		<a class="expert-button" href="javascript: history.go(-1);">back</a>
+		<a class="expert-button" href="/directory/expert-witness/search">search again</a>
+		<a href="/expert/{{contact.Id}}" class="expert-button">cancel</a>
+</div>
+
+
+<div class="status hidden">
+&nbsp;
+</div>
+
+<form id="expert-witness-update-form">
+	
+	<div>
+	
+		{#
+		<fieldset>
+			<legend>Admin only</legend>
+			<div class="form-item">
+				<label for="expert-type">Witness status</label>
+				<input type="checkbox" id="expert-type" value="adverse-witness" />Adverse Witness
+				<br />
+				<input type="checkbox" id="expert-type" value="friendly-witness" />Friendly Witness
+			</div>
+			<div class="form-item">
+				<label for="documents">Documents/Transcripts</label>
+				<input type="file" id="documents" multiple="multiple" />
+				<!--
+				<input type="file" id="documents" multiple="multiple" accept="image/*" />
+				-->
+			</div>
+		</fieldset>
+		#}
+		
+		
+		<div class="form-item">
+			<label for="FirstName">First Name</label>
+			<input type="text" name="FirstName" id="FirstName" placeholder="First Name" value="{{ contact.FirstName }}" />
+		</div>
+		
+		<div class="form-item">
+			<label for="LastName">Last Name</label>
+			<input type="text" name="LastName" id="LastName" placeholder="Last Name" value="{{ contact.LastName }}" />
+		</div>
+		
+		<div class="form-item">
+			<label for="Ocdla_Organization__c">Company</label>
+			<input type="text" name="Ocdla_Organization__c" id="Ocdla_Organization__c" placeholder="Company name, if applicable" value="{{ contact.Ocdla_Organization__c }}" autocapitalize="sentences" />
+		</div>
+		
+		<div class="form-item">
+			<label for="OrderApi__Work_Phone__c">Telephone</label>
+			<input type="tel" name="OrderApi__Work_Phone__c" value="{{ contact.OrderApi__Work_Phone__c }}" placeholder="800-123-4567" />
+		</div>
+		
+		<div class="form-item">
+			<label for="OrderApi__Work_Email__c">Email</label>
+			<input type="email" name="OrderApi__Work_Email__c" value="{{ contact.OrderApi__Work_Email__c }}" placeholder="myname at mycompany.com" />
+		</div>
+
+		
+		<div class="form-item">
+			<label for="Ocdla_Website__c">Website</label>
+			<input type="url" name="Ocdla_Website__c" placeholder="www.yourwebsite.com" value="{{ contact.Ocdla_Website__c }}" />
+		</div>
+		
+		<fieldset>		
+			<legend>Address</legend>
+			<div class="form-item">
+				<label for="MailingStreet">Street / P.O. Box</label>
+				<textarea cols="20" rows="2" name="MailingStreet">{{ contact.MailingStreet }}</textarea>
+			</div>
+			
+			<div class="form-item">
+				<label for="MailingCity">City</label>
+				<input type="text" name="MailingCity" value="{{ contact.MailingCity }}" />
+			</div>
+			
+			<div class="form-item">
+				<label for="MailingStateCode">State</label>
+				<input type="text" name="MailingStateCode" value="{{ contact.MailingStateCode }}" />
+			</div>
+			
+			<div class="form-item">
+				<label for="MailingPostalCode">Zip</label>
+				<input type="text" name="MailingPostalCode" value="{{ contact.MailingPostalCode }}" />
+			</div>
+		</fieldset>
+		
+		
+		
+
+	
+		<fieldset>
+			<legend>Expertise</legend>
+			<!--<div class="form-item">
+				<label for="expertise-comments">General Area</label>
+				<select name="area-of-expertise">
+					<option selected="selected">Aid and Assist</option>
+					<option>Mitigation</option>
+					<option>Forensic Expert</option>
+				</select>
+			</div>
+			-->
+				
+			<div class="form-item">	
+				<label for="Ocdla_Expert_Witness_Primary__c">Primary Area</label>				
+				<select name="Ocdla_Expert_Witness_Primary__c">
+				{% set vars = {'primary':contact.Ocdla_Expert_Witness_Primary__c} %}
+					{% include 'areas.html' with vars %}
+				</select>
+			</div>
+			
+			
+			<div class="form-item">
+				<label for="Ocdla_Expert_Witness_Other_Areas__c">Other Areas of interest</label>
+				<p class="instructions">Let's add some instructions for the Other Areas field here.</p>
+				<textarea name="Ocdla_Expert_Witness_Other_Areas__c" id="Ocdla_Expert_Witness_Other_Areas__c" rows="5" style="line-height:normal;height:100px;">{{ contact.Ocdla_Expert_Witness_Other_Areas__c }}</textarea>
+			</div>
+			
+			<div class="form-item">
+				<label for="Ocdla_Expert_Comments__c">Comments</label>
+				<p class="instructions">Let's add some instructions for the Comments field here.</p>
+				<textarea name="Ocdla_Expert_Comments__c" id="Ocdla_Expert_Comments__c" rows="5" style="line-height:normal;height:100px;">{{ contact.Ocdla_Expert_Comments__c }}</textarea>
+			</div>
+			
+			<div class="form-item">
+				<label for="Ocdla_Feedback__c">Feedback (Optional)</label>
+				<p class="instructions">This information won't be published in the directory.  <br />Provide additional information that OCDLA can use to make the Expert Witness directory more useful.</p>
+				<textarea name="Ocdla_Feedback__c" id="Ocdla_Feedback__c" rows="5" style="line-height:normal;height:100px;">{{ contact.Ocdla_Feedback__c }}</textarea>
+			</div>
+		</fieldset>
+	
+		<fieldset>
+			<legend>Availability (Optional)</legend>
+			<p class="instructions">List the next date range when you will *not be available.</p>
+			<div class="form-item">
+				<!--<input type="radio" name="availability-type" value="exclude-dates" checked="checked" />I am available:
+				<br />
+				<input type="radio" name="availability-type" value="include-dates" />
+				-->I am not available:
+			</div>
+
+			<div class="form-item">
+				<label for="Ocdla_Expert_Unavailability_Start_Date__c_tmp">Start Date</label>
+				<input class="dates" name="Ocdla_Expert_Unavailability_Start_Date__c_tmp" value="{{ contact.Ocdla_Expert_Unavailability_Start_Date__c }}" id="Ocdla_Expert_Unavailability_Start_Date__c_tmp" />
+				<input type="hidden" name="Ocdla_Expert_Unavailability_Start_Date__c" value="{{ contact.Ocdla_Expert_Unavailability_Start_Date__c }}" id="Ocdla_Expert_Unavailability_Start_Date__c" />
+			</div>
+			<div class="form-item">
+				<label for="Ocdla_Expert_Unavailability_End_Date__c_tmp">End Date</label>
+				<input class="dates" name="Ocdla_Expert_Unavailability_End_Date__c_tmp" value="{{ contact.Ocdla_Expert_Unavailability_End_Date__c }}" id="Ocdla_Expert_Unavailability_End_Date__c_tmp" />
+				<input type="hidden" name="Ocdla_Expert_Unavailability_End_Date__c" value="{{ contact.Ocdla_Expert_Unavailability_End_Date__c }}" id="Ocdla_Expert_Unavailability_End_Date__c" />
+			</div>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Geographic Availability (Optional)</legend>
+			<p class="instructions">Let us know whether you prefer to work locally or are willing to consult throughout the state.</p>
+			<div class="form-item">
+				<label for="travel-options">I am willing to travel to:</label>
+				
+				<input type="radio" name="Ocdla_Expert_Travel_Availability__c" value="Within 25 miles" {% if contact.Ocdla_Expert_Travel_Availability__c=="Within 25 miles" %}checked="checked"{% endif %} />&nbsp;Within 25 miles of my address
+				<br />
+				
+				<input type="radio" name="Ocdla_Expert_Travel_Availability__c" value="Within 25 miles" {% if contact.Ocdla_Expert_Travel_Availability__c=="Within 100 miles" %}checked="checked"{% endif %} />&nbsp;Within 100 miles of my address
+				<br />
+				
+				<input type="radio" name="Ocdla_Expert_Travel_Availability__c" {% if contact.Ocdla_Expert_Travel_Availability__c=="Further with notice" %}checked="checked"{% endif %} value="Statewide" />&nbsp;Within 100 miles of my address, or further with advance notice. 	
+				<br />
+				
+				<input type="radio" name="Ocdla_Expert_Travel_Availability__c" {% if contact.Ocdla_Expert_Travel_Availability__c=="Statewide" %}checked="checked"{% endif %} value="Statewide" />&nbsp;Anywhere in the state
+			</div>		
+		</fieldset>
+		
+		
+		<fieldset>
+			<legend>Business (Optional)</legend>
+			<p class="instructions">List your hourly rate.  If you require a minimum number of consulting hours, list that here.</p>
+			<div class="form-item">
+				<label for="Ocdla_Expert_Hourly_Rate__c">Hourly rate</label>
+				<input type="number" minimum="0" name="Ocdla_Expert_Hourly_Rate__c" placeholder="0.00" value="{{ contact.Ocdla_Expert_Hourly_Rate__c }}" />
+			</div>
+			
+			<div class="form-item">
+				<label for="Ocdla_Expert_Minimum_Hours__c">Minimum hours</label>
+				<input type="number" minimum="0" name="Ocdla_Expert_Minimum_Hours__c" value="{{ contact.Ocdla_Expert_Minimum_Hours__c }}" placeholder="0" />
+			</div>
+			
+		</fieldset>
+		
+
+		<fieldset>
+			<legend>Supplementary Files (Optional)</legend>
+			<div class="form-item">
+				<label for="documents">CV/Articles</label>
+				<input type="file" id="documents" multiple="multiple" />
+			</div>
+		</fieldset>
+
+		
+		
+		<div class="form-item">
+			<button id="submit-me" type="submit">Update</button>
+		</div>
+	
+	</div>
+</form>
+
+<style type="text/css">
+	.status {
+		position:fixed;
+		top:0px;
+		margin:0 auto;
+		display:none;
+		color:#fff;
+		padding:15px;
+		height:30px;
+		width:200px;
+		background-color:green;
+	}
+	.show-status {
+		display:block;
+	}
+	.status {
+		background-color:green;
+	}
+	.error {
+		background-color:red;
+	}
+</style>
+
+<script>
+  $(function() {
+    $( ".dates" ).datepicker({dateFormat:"mm/dd/yy"}).val();
+    $('.dates').on('change',function(e){
+    	$proxyId = $(this).attr('id').substring(0,$(this).attr('id').length-4);
+
+    	$forceDate = $(this).val()=='' ? '' : $.datepicker.formatDate('yy-mm-dd',new Date($(this).val()));
+    	$('#'+$proxyId).val($forceDate);
+    	if($forceDate==$('#'+$proxyId).val()) {
+    		console.log('date was successfully changed.');
+    	}
+    	// alert($(this).val());
+    });
+    $( "form" ).on( "submit", function( event ) {
+    	$('.status').html('Updating expert...');
+			$('.status').addClass('show-status');
+			event.preventDefault();
+			console.log( $( this ).serialize() );
+
+			$.ajax({ 
+					type: 'POST',
+					url: "/expert/{{ contact.Id }}/update",
+					data: $(this).serialize(),
+					success:function(data){
+						if(data.success){
+							// alert('updated!');
+							$('.status').html('The record was updated.');
+							$('.status').addClass('show-status');
+						} else {
+							console.log(data);
+							$('.status').html('There was an error: '+data.error);
+							$('.status').addClass('error').addClass('show-status');
+						}
+					},
+					error: function(data){
+							$('.status').html('There was an error: '+data.error);
+							$('.status').addClass('error').addClass('show-status');
+					}
+				});
+			});
+    // $(".dates").datepicker("option", "dateFormat", "yy-mm-dd" );
+    
+    // yy-mm-dd
+//     $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+  });
+</script>

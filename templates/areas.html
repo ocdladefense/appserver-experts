@@ -1,0 +1,29 @@
+
+{% set areas = ['Accident Reconstruction','Accident Reconstruction/Fire','Accounting','Animals/Veterinarian','Anthropology','Audio/Video','Boating/Maritime','Cannabis/Marijuana','Chemical Dependence','Computers/Cell Phones/Digital Evidence','Criminology/Gangs','Dentistry','DNA','Document Examination/Handwriting Analysis','Elder/Disability Issues','Fingerprints','Fire Investigation/Firearms/Weapons','Forensics/Crime Scene/Ballistics/Blood Spatter','Forensics/Medical/Toxicology','Immigration','Infant/Child Medical','Intellectual Property','Interpreter','Interrogations & Confession','Jury & Trial Consultant','Knives','Law Enforcement/Use of Force/Prison/Corrections','Medical','Mitigation/Investigation','Neuropsychology','Neuropsychology/Cross-Cultural','Nonverbal Communication','Pathology','Polygraph','Psych/Clinical','Psych/Forensic Evaluator','Psych/Forensic Evaluator/Cross-Cultural','Psychiatry/Child','Psychiatry/Forensic','Psychiatry/Gender/Trans','Psychology/Child Welfare','Psychology/Clinical','Psychology/Cross-Cultural','Psychology/General','Psychology/Mental Health','Psychology/Sex Offenders','Sex Offenders','Speech/Language Pathology'] %}
+
+{#
+{% for o in areas %}
+	{% if showAll %}
+		<option value='{{ o.value }}'>{{ o.option }}</option>
+	{% elseif primary == '' %}
+		<option selected="selected" value="">None</option>
+	{% elseif primary == area %}
+		<option selected="selected" value="{{ o.value }}">{{ o.option }}</option>
+	{% else %}
+		<option value='{{ o.value }}'>{{ o.option }}</option>
+	{% endif %}
+{% endfor %}
+#}
+
+
+{% for o in areas %}
+	{% if showAll %}
+		<option value='{{ o }}'>{{ o }}</option>
+	{% elseif primary == '' %}
+		<option selected="selected" value="">None</option>
+	{% elseif primary == area %}
+		<option selected="selected" value="{{ o }}">{{ o }}</option>
+	{% else %}
+		<option value='{{ o }}'>{{ o }}</option>
+	{% endif %}
+{% endfor %}

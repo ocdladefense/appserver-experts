@@ -1,0 +1,124 @@
+
+
+<h3 style="margin-bottom:15px;">Switch to <a href="/directory">OCDLA Membership Directory</a></h3>
+
+<a href="javascript: history.go(-1);">Back to Previous Page</a>
+
+{% if error|length %}
+	<p style='font-style:italic;'>
+		Error: {{ error }}
+	</p>
+{% endif %}
+
+<!--
+<div style="border: 1px solid #ccc; padding:10px; margin-top:20px;">
+	Link to the <a target="_new" href="https://docs.google.com/presentation/d/1Fh85S5CRNI1VPaewk5i54Vtqg62xvW8V5kG7frx8IfE/edit#slide=id.p">Expert Witness profile presentation</a>
+</div>
+-->
+
+
+
+
+
+	<form id="expertSearchForm" method="post" onsubmit="return true;" enctype="multipart/form-data">
+
+  	<table style="padding:2px; border-top:1px solid #ccc; margin-top:15px; width:80%;">
+			<tr>
+  			<td>
+  				<p>&nbsp;</p>
+  			</td>
+				<td>
+					<p><input id="findAllExperts" value="Find all experts" type="submit" /></p>
+				</td>
+			</tr>
+			
+  		<tr>
+  			<td>
+  				<p>Primary Expertise:</p>
+  			</td>
+  			<td>
+  				<select id="Ocdla_Expert_Witness_Primary__c" name="Ocdla_Expert_Witness_Primary__c">
+  					<option selected="selected" value="">All Experts</option>
+  					{{ primaryAreas |raw }}
+					{# include 'areas.html' with {'showAll':true,'primaryAreas':primaryAreas} #}
+					</select>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td>
+					<p>First Name:</p>
+				</td>
+				<td>
+					<input type="text" name="FirstName" size="20" value="" maxlength="35" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>Last Name:</p>
+				</td>
+				<td>
+					<input type="text" name="LastName" size="20" value="" maxlength="35" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>Company Name:</p>
+				</td>
+				<td>
+					<input type="text" name="Ocdla_Organization__c" size="20" value="" maxlength="35" /> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>City:</p>
+				</td>
+				<td>
+					<input type="text" name="MailingCity" size="20" value="" maxlength="35" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>Geographic Availability:</p>
+				</td>
+				<td>
+					<select disabled="disabled" name="Ocdla_Expert_Geographic_Availability__c">
+						<option selected="selected">Statewide</option>
+						<option>Western Oregon</option>
+						<option>Southern Oregon</option>
+						<option>Eastern Oregon</option>
+					</select>
+				</td>
+			</tr>
+		
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="left" style="text-align:left;">
+					<input id="expertSearchSubmit" type="submit" name="Submit" value="Search" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+
+<script type="text/javascript">
+	
+	var findAll = document.getElementById('findAllExperts');
+	findAll.addEventListener('click',function(e){
+		jQuery('#expertSearchForm input[type="text"]').attr('value','');
+		jQuery("#Ocdla_Expert_Witness_Primary__c").val('');
+	},false);
+	
+	$(document).ready(function() {
+		$(window).keydown(function(event){
+			if(event.keyCode == 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
+	});
+</script>

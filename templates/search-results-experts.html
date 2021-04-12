@@ -1,0 +1,107 @@
+{% set counter = 1 %}
+
+{#
+	result:
+		Id
+		Contact_ID__c
+		LastName
+		FirstName
+		Ocdla_Organization__c
+		Ocdla_Publish_Work_Phone__c
+		Ocdla_Publish_Work_Email__c
+		Ocdla_Publish_Mailing_Address__c
+		OrderApi__Work_Phone__c
+		OrderApi__Work_Email__c
+		Ocdla_Website__c
+		
+	showSubcategories - Whether to divide search results into their respective subcategories.  Set to false by default
+#}
+<a href="javascript: history.go(-1);">Back to Previous Page</a>
+
+{% if error|length %}
+	<p style='font-style:italic;'>
+		Error: {{ error }}
+	</p>
+{% endif %}
+
+{% if debug %}
+<p style="background-color:#eee; padding:8px;font-style:italic;">
+	{{ query }}
+</p>
+{% endif %}
+
+<p style="background-color:#eee; padding:8px;font-style:italic;">
+	Your search returned {{ numResults }} result(s).
+</p>
+
+	<div id="search-results">
+		<ul class="row search-result-header not-mobile">
+			<li class="cell cell-header cell-directory-counter">#</li>
+			<li class="cell cell-header cell-directory-name">Name</li>
+			<li class="cell cell-header cell-directory-company">Company</li>
+			<li class="cell cell-header cell-directory-phone">Phone</li>
+			<li class="cell cell-header cell-directory-city">City</li>
+			<li class="cell cell-header cell-directory-email">Email</li>
+			<li class="cell cell-header cell-directory-primary-areas">Primary Expertise</li>
+			<li class="cell cell-header cell-directory-primary-areas">Notes</li>
+		</ul>
+
+	{% if showSubcategories|default(false) == false %}
+		<ul class="row search-result-header not-mobile">
+			<li class="cell cell-header col-span">
+				<h4>{{ searchCategory }}</h4>
+			</li>
+		</ul>
+	{% endif %}
+	
+
+		
+		{% set currentCat = '' %}
+		{% for result in results %}
+			
+			{% if result.Ocdla_Expert_Witness_Primary__c == '' %}
+				{% set tmpCat = 'Uncategorized' %}
+			{% else %}
+				{% set tmpCat = result.Ocdla_Expert_Witness_Primary__c %}
+			{% endif %}
+			
+			{% if showSubcategories|default(false) and currentCat != tmpCat %}
+				<ul class="row search-result-header not-mobile">
+					<li class="cell cell-header">
+						<h4>{{ tmpCat }}</h4>
+					</li>
+				</ul>
+
+			{% endif %}
+			<ul class="row result-row {{ cycle(['odd','even'],loop.index) }}">
+				<li class="cell cell-directory-counter">
+					{{ counter }}
+					{% set counter = counter + 1 %}
+				</li>
+				<li class="cell cell-directory-name">
+					<a href="{{ link }}/expert/{{ result.Id }}">{{ result.LastName }}, {{ result.FirstName }}</a>
+				</li>
+				<li class="cell cell-directory-company">
+					{{ result.Ocdla_Organization__c }}
+				</li>
+				<li class="cell cell-directory-phone">
+					{{ result.OrderApi__Work_Phone__c }}
+				</li>
+				<li class="cell cell-directory-city">
+					{{ result.MailingCity }}
+				</li>
+
+				<li class="cell cell-directory-email">
+					<a href="{{ link }}/expert/{{ result.Id }}">View email</a>
+				</li>
+				<li class="cell cell-directory-primary-areas">
+					{{ result.Ocdla_Expert_Witness_Primary__c }}
+				</li>
+				<li class="cell cell-directory-primary-areas">
+					{{ result.Ocdla_Expert_Witness_Other_Areas__c }}
+				</li>
+				
+			</ul>	
+			{% set currentCat = tmpCat %}
+		{% endfor %}
+</div>

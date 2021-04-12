@@ -1,0 +1,221 @@
+/**
+ * Search results
+ *
+ */
+.search-result-list-header th {
+	color:#fff;
+}
+
+
+
+.cell-directory-company {
+	width:210px;
+}
+
+.cell-directory-phone {
+	width:100px;
+}
+
+.cell-directory-city {
+	width:75px;
+}
+
+.cell-directory-name {
+
+}
+
+
+
+/**
+ * Layout
+ */
+#right
+{
+	width:250px;
+}
+
+.expert-business
+{
+	font-size:22px;
+	color:#666;
+}
+.expert-profile-section
+{
+	min-height:120px;
+	font-size:18px;
+	margin-bottom:50px;
+	margin-top:40px;
+}
+.primary-expertise
+{
+	display:inline-block;
+	margin-top:6px;
+}
+.expert-profile-section h3
+{
+	box-sizing:border-box;
+	color:#f18522;
+	font-size:28px;
+	font-weight:300;
+	margin-bottom:20px;
+}
+
+.expert-profile-name
+{
+	font-size:1.8em;
+	box-sizing:border-box;
+	color:#222;
+	font-size:46px;
+	font-weight:300;
+}
+
+a.primary-interest
+{
+	display:inline-block;
+	padding:2px;
+	background:rgb(86, 101, 138) none repeat scroll 0 0;
+	font-size:18px;
+	border: 1px solid #666;
+    border-radius: 3px;
+    color: #fff;
+    font-size:10px;
+    text-transform: uppercase;
+    cursor:pointer;
+		padding:3px 8px;
+}	
+
+a.expert-button
+{
+	display:inline-block;
+	background:#bf9500 none repeat scroll 0 0;
+	font-size:18px;
+	border: 1px solid #f18522;
+	border-radius: 3px;
+	color: #fff !important;
+	opacity: 1;
+	padding: 10px 25px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:13px;
+	text-transform: uppercase;
+}
+
+a:hover
+{
+	text-decoration:none !important;
+}
+
+.expert-actions
+{
+	height:100px;
+}
+
+.expert-title-section
+{
+	font-size:14px;
+}
+label
+{
+	display:block;
+	font-weight:bold;
+}	
+
+.form-item,
+fieldset
+{
+	margin-top:15px;
+	padding:7px;
+}	
+
+legend
+{
+	padding:3px;
+	font-size:12pt;
+}
+
+input[type=text], input[type=url], input[type=email], input[type=password], input[type=tel],
+textarea {
+  -webkit-appearance: none; -moz-appearance: none;
+  display: block;
+  margin: 0;
+  width: 95%; height: 40px;
+  line-height: 40px; font-size: 17px;
+  border: 1px solid #bbb;
+  padding-left:6px;
+  padding-right:6px;
+}
+
+textarea
+{
+	padding:6px;
+}
+
+input[type=checkbox] {
+ width: 44px; height: 44px;
+ -webkit-border-radius: 22px; -moz-border-radius: 22px; border-radius: 22px;
+ border: 1px solid #bbb;
+ vertical-align:middle;
+}
+
+button[type=submit] {
+ -webkit-appearance: none; -moz-appearance: none;
+ display: block;
+ margin: 1.5em 0;
+ font-size: 1em; line-height: 2.5em;
+ color: #333;
+ font-weight: bold;
+ height: 2.5em; width: 100%;
+ background: #fdfdfd; background: -moz-linear-gradient(top, #fdfdfd 0%, #bebebe 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdfdfd), color-stop(100%,#bebebe)); background: -webkit-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: -o-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: -ms-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: linear-gradient(to bottom, #fdfdfd 0%,#bebebe 100%);
+ border: 1px solid #bbb;
+ -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;
+}
+
+
+
+
+
+
+
+/**
+ * Mobile
+ *
+ * Card adjustments for mobile phone devices/iPad
+ */ 
+
+@media only screen and (max-width : 667px) {
+	#search-results ul {
+		border:1px solid #666;
+		border-radius:2px;
+		color:#222;
+		font-size:12px;
+		line-height:1.4;
+		display:inline-block;
+		float:none;
+    height: 160px;
+    margin-right: 4px;
+    width: 45%;
+    padding:6px 10px 8px;
+		border: 1px solid #E1E3DF;
+    border-color:#ddd;
+    border-bottom-color:#bbb;
+    background-color:#fff;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);	
+		cursor:pointer;
+		text-align:left;
+		vertical-align:top;
+		position:relative;
+		margin-top:0px;
+		margin-bottom:6px;
+	}
+	
+	.cell-directory-name {
+		font-size:1.2em;
+		padding-top:3px;
+		padding-bottom:3px;
+	}
+}
+
+
+@media only screen and (max-width : 320px) {
+
+}

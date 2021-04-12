@@ -1,0 +1,74 @@
+
+
+{% if error|length %}
+	<p style='font-style:italic;'>
+		Error: {{ error }}
+	</p>
+{% endif %}
+
+{% if debug %}
+	<p style='font-style:italic;'>
+		Query: {{ query }}
+	</p>
+{% endif %}
+
+{% for contact in contacts %}
+
+<div class="expert-local-actions">
+		<a class="expert-button" href="javascript: history.go(-1);">back</a>
+		<a class="expert-button" href="/directory/expert-witness/search">search again</a>
+		<a href="/expert/{{contact.Id}}/edit" class="expert-button">edit</a>
+</div>
+
+<div class="expert-title-section">
+	<h3 class="expert-profile-name">{{ contact.FirstName }} {{ contact.LastName }}</h3>
+	{% if contact.Ocdla_Organization__c is not empty %}
+		<span class="expert-business">{{ contact.Ocdla_Organization__c }}</span>
+	{% endif %}
+	<br />
+
+	<span class="primary-expertise">Primary expertise:
+		<a class="primary-interest">{{ contact.Ocdla_Expert_Witness_Primary__c}}</a>
+	</span>
+</div>
+
+<div class="expert-profile-section">
+	<h3>
+		Contact
+	</h3>
+	{{ contact.MailingStreet }}<br />
+	{{ contact.MailingCity }}, {{ contact.MailingStateCode }} {{ contact.MailingPostalCode }}<br />
+	{{ contact.OrderApi__Work_Phone__c }}<br />
+	<a href="mailto:{{ contact.OrderApi__Work_Email__c }}">{{ contact.OrderApi__Work_Email__c }}</a><br />
+	{{ contact.Ocdla_Website__c }}
+</div>
+
+<div class="expert-profile-section">
+	<h3>
+		Expertise
+	</h3>
+	{{ contact.Ocdla_Expert_Witness_Primary__c}}
+</div>
+
+
+<div class="expert-profile-section">
+	<h3>
+		Notes
+	</h3>
+	{{ contact.Ocdla_Expert_Witness_Other_Areas__c}}
+</div>
+
+
+
+
+<div class="expert-profile-section">
+	<h3>
+		Files
+	</h3>
+	There are currently no transcripts available for this Expert.
+	<div class="expert-actions">
+		<a class="expert-button">upload</a>
+	</div>
+</div>
+
+{% endfor %}
