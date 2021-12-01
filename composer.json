@@ -1,0 +1,12 @@
+
+{
+	"name": "ocdladefense/legacy-",
+    "description": "",
+    "type": "wordpress-theme",
+    "config": {
+        "preferred-install": {
+            "ocdladefense/*": "source"
+        }
+    },
+    "require": {}
+}
